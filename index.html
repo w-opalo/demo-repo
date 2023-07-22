@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <p id="ffnum">First Name:</p>
+    <p id="rsnum">Email:</p>
+    <p id="rres">ID:</p>
+
+    <form action="" method="">
+
+    <h3>ADD TWO NUMBERS</h3>
+    <label>First Name</label><br>
+    <input type="text" id="fname" name="fname" value=" "><br><br>
+
+    <label>Email</label><br>
+    <input type="email" id="email" name="email" value=""></label><br><br>
+
+    <label>ID</label><br>
+    <input type="text" id="id" name="id" value=""><br><br>
+
+
+
+    </form>
+    <button id="btnSubmit">Submit</button>
+
+    <script type="text/javascript">
+        $(document).ready(function(){
+        //declare variables
+        $fname = "";
+        $email = "";
+        $id = "";
+
+        $("#btnSubmit").click(function(){
+        $fname = $("#fname").val();
+        $email = $("#email").val();
+        $id = $("#id").val();
+
+
+        //AJAX
+        $.ajax({
+            type: "GET",
+            url: "save.php",
+            data:{
+                rq:"save",
+                fname: $fname,
+                id: $id,
+                email: $email
+            },
+            beforeSend:function(){
+                //code to disable button
+                //loading gif
+                alert("About to send your payload!!");
+            },
+            success:function(feedback){
+
+                alert(feedback);
+
+                $("fname").text("Full Name " + $fname);
+                $("email").text("Full Name " + $email);
+                $("id").text("Full Name " + $id);
+            },
+            error: function(err){
+
+            },
+            });
+
+
+
+
+
+            })
+        });
+
+
+    </script>
+</body>
+</html>
